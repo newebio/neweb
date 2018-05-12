@@ -1,7 +1,7 @@
 import { IHistoryContext } from ".";
 
 export * from "neweb-core";
-export { ClassicRouter, FrameController } from "neweb-server";
+export * from "neweb-server";
 export interface IViewProps<P, D> {
     params: P;
     data: D;
