@@ -1,6 +1,6 @@
 {
   "name": "neweb",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -46,7 +46,7 @@
     "neweb-browser": "^0.10.0",
     "neweb-core": "^0.10.0",
     "neweb-pack": "^0.1.2",
-    "neweb-server": "^0.10.0",
+    "neweb-server": "^0.10.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "rxjs": "^6.1.0",
