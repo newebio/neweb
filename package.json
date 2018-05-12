@@ -1,6 +1,6 @@
 {
   "name": "neweb",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build:watch": "webpack -w --env=development --mode=development"
   },
   "bin": {
-    "neweb": "server.js"
+    "neweb": "./bin.js"
   },
   "repository": {
     "type": "git",
