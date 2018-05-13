@@ -17,6 +17,7 @@ const neweb_server_1 = require("neweb-server");
 const path_1 = require("path");
 const SocketIO = require("socket.io");
 const ModulesServer_1 = require("./lib/ModulesServer");
+const SessionsManager_1 = require("./lib/SessionsManager");
 const SocketIOClient_1 = require("./lib/SocketIOClient");
 function boostrap() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -28,6 +29,7 @@ function boostrap() {
         expressApp.use(express.static(path_1.resolve(path_1.join(appPath, "public"))));
         expressApp.get("/bundle.js", (_, res) => res.sendFile(path_1.resolve(path_1.join(__dirname, "dist", "bundle.js"))));
         const modulesPath = path_1.join(appPath, "..", "modules");
+        const sessionsPath = path_1.join(appPath, "..", "sessions");
         const modulePacker = new neweb_pack_1.ModulePacker({
             appRoot: appPath,
             excludedModules: ["react", "react-dom", "neweb"],
@@ -40,8 +42,12 @@ function boostrap() {
             modulePacker,
         });
         yield app.init();
+        const sessionsManager = new SessionsManager_1.default({
+            sessionsPath,
+        });
         const seancesManager = new neweb_server_1.SeancesManager({
             app,
+            sessionsManager,
         });
         // neweb
         const server = new neweb_server_1.Server({
@@ -63,6 +69,9 @@ function boostrap() {
                 url: req.url,
                 sessionId: req.session.id,
                 headers: req.headers,
+            });
+            Object.keys(response.headers).map((key) => {
+                res.header(key, response.headers[key]);
             });
             if (response.type === "NotFound") {
                 next();

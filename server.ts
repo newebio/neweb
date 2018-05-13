@@ -7,6 +7,7 @@ import { Application, SeancesManager, Server } from "neweb-server";
 import { join, resolve } from "path";
 import SocketIO = require("socket.io");
 import ModuleServer from "./lib/ModulesServer";
+import SessionsManager from "./lib/SessionsManager";
 import SocketIOClient from "./lib/SocketIOClient";
 
 export default async function boostrap() {
@@ -20,6 +21,7 @@ export default async function boostrap() {
     expressApp.get("/bundle.js", (_, res) => res.sendFile(resolve(join(__dirname, "dist", "bundle.js"))));
 
     const modulesPath = join(appPath, "..", "modules");
+    const sessionsPath = join(appPath, "..", "sessions");
     const modulePacker = new ModulePacker({
         appRoot: appPath,
         excludedModules: ["react", "react-dom", "neweb"],
@@ -32,9 +34,12 @@ export default async function boostrap() {
         modulePacker,
     });
     await app.init();
-
+    const sessionsManager = new SessionsManager({
+        sessionsPath,
+    });
     const seancesManager = new SeancesManager({
         app,
+        sessionsManager,
     });
     // neweb
     const server = new Server({
@@ -56,6 +61,9 @@ export default async function boostrap() {
             url: req.url,
             sessionId: (req.session as Express.Session).id,
             headers: req.headers as any,
+        });
+        Object.keys(response.headers).map((key) => {
+            res.header(key, response.headers[key]);
         });
         if (response.type === "NotFound") {
             next();

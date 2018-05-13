@@ -1,7 +1,7 @@
 import expressSession = require("express-session");
 import {
-    INewControllerDataParams, IRemoteClient, IRemoteClientMessage, IRemoteErrorParams,
-    IRemoteNewPageParams, IRemoteServer, IRemoteServerMessage, RemoteMessageType,
+    INewControllerDataParams, IRemoteClient, IRemoteClientMessage,
+    IRemoteErrorParams, IRemoteNewPageParams, IRemoteServer, IRemoteServerMessage, RemoteMessageType,
 } from "neweb-core";
 import { IServerRequest } from "neweb-server";
 import SocketIO = require("socket.io");
@@ -26,6 +26,9 @@ class SocketIOClient implements IRemoteClient {
                 args: params.args,
                 controllerId: params.frameId,
             });
+        });
+        this.config.socket.on(RemoteMessageType.Navigate, (params) => {
+            this.server.navigate(params);
         });
     }
     public async getRequest(): Promise<IServerRequest> {

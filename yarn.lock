@@ -4442,9 +4442,9 @@ neweb-pack@^0.1.2:
     util "^0.10.3"
     webpack "^4.3.0"
 
-neweb-server@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.10.2.tgz#1df489f4804c5df03180760f4625acf60044d726"
+neweb-server@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.10.3.tgz#ddb305a39d65620ad20a8c7d5c457ebf0089232b"
   dependencies:
     "@types/react" "^16.3.14"
     "@types/react-dom" "^16.0.5"
