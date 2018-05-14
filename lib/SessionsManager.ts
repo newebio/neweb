@@ -1,11 +1,9 @@
-import { exists, readFile, writeFile } from "fs";
-import mkdirp = require("mkdirp");
+import { Store } from "express-session";
 import { ISessionContext, ISessionsManager } from "neweb-server";
-import { dirname, join, resolve } from "path";
 import { Subject } from "rxjs";
-import { promisify } from "util";
 export interface ISessionsManagerConfig {
     sessionsPath: string;
+    sessionsStorage: Store;
 }
 class SessionsManager implements ISessionsManager {
     protected contexts: {
@@ -23,7 +21,7 @@ class SessionsManager implements ISessionsManager {
     constructor(protected config: ISessionsManagerConfig) { }
     public async getSessionContext(sessionId: string) {
         if (!this.contexts[sessionId]) {
-            this.contexts[sessionId] = await this.createContext(sessionId);
+            await this.createContext(sessionId);
         }
         return this.contexts[sessionId].context;
     }
@@ -66,37 +64,45 @@ class SessionsManager implements ISessionsManager {
                 await this.save(sessionId);
             },
         };
+        this.contexts[sessionId] = { data, context };
         const saved = await this.get(sessionId);
         if (saved) {
-            Object.keys(saved).map((key) => {
-                context.set(key, saved[key]);
-            });
+            Object.keys(saved)
+                .filter((key) => key !== "id" && key !== "cookie" && key !== "__lastAccess")
+                .map((key) => {
+                    context.set(key, saved[key]);
+                });
         }
-        return { data, context };
     }
-    public async get(id: string): Promise<any | null> {
-        const sessionPath = this.getSessionPath(id);
-        if (!await promisify(exists)(sessionPath)) {
-            return null;
-        }
-        try {
-            const data = (await promisify(readFile)(sessionPath)).toString();
-            return JSON.parse(data);
-        } catch (e) {
-            return null;
-        }
+    public async get(sid: string): Promise<any | null> {
+        return new Promise<any>((resolve, reject) => {
+            this.config.sessionsStorage.get(sid, (err, session) => {
+                if (err) {
+                    if (err.code === "ENOENT") {
+                        resolve(null);
+                        return;
+                    }
+                    reject(err);
+                    return;
+                }
+                resolve(session);
+            });
+        });
     }
     public async save(id: string) {
         const data: any = {};
         Object.keys(this.contexts[id].data).map((d) => {
             data[d] = this.contexts[id].data[d].value;
         });
-        const sessionPath = this.getSessionPath(id);
-        await promisify(mkdirp)(dirname(sessionPath));
-        await promisify(writeFile)(sessionPath, JSON.stringify(data));
-    }
-    protected getSessionPath(id: string) {
-        return resolve(join(this.config.sessionsPath, id, "sessions.json"));
+        return new Promise((resolve, reject) => {
+            this.config.sessionsStorage.set(id, data, (err) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve();
+            });
+        });
     }
 }
 export default SessionsManager;

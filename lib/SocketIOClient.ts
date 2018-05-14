@@ -1,4 +1,3 @@
-import expressSession = require("express-session");
 import {
     INewControllerDataParams, IRemoteClient, IRemoteClientMessage,
     IRemoteErrorParams, IRemoteNewPageParams, IRemoteServer, IRemoteServerMessage, RemoteMessageType,
@@ -33,19 +32,11 @@ class SocketIOClient implements IRemoteClient {
     }
     public async getRequest(): Promise<IServerRequest> {
         const socket = this.config.socket;
-        const request = {
-            clientIpAddress: socket.conn.remoteAddress,
+        return {
+            url: socket.request.url,
             headers: socket.request.headers,
-            url: "",
-            hostname: "",
-            sessionId: "",
-            session: undefined as any,
+            sessionId: socket.request.session.id,
         };
-        await new Promise((resolve) => expressSession({
-            secret: "12345",
-        })(request as any, {} as any, resolve));
-        request.sessionId = request.session.id;
-        return request;
     }
     public connectTo(server: IRemoteServer) {
         this.server = server;
