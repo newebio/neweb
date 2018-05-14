@@ -51,6 +51,7 @@ function boostrap() {
         const sessionsFileStore = SessionFileStore(expressSession);
         const sessionsStorage = new sessionsFileStore({
             path: sessionsPath,
+            retries: 1,
             ttl: appConfig.session.ttl || 86400 * 100000,
         });
         const session = expressSession({

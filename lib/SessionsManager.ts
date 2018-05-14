@@ -68,6 +68,14 @@ class SessionsManager implements ISessionsManager {
         const saved = await this.get(sessionId);
         if (saved) {
             Object.keys(saved)
+                .map((key) => {
+                    data[key] = {
+                        value: saved[key],
+                        hasValue: true,
+                        stream: new Subject(),
+                    };
+                });
+            Object.keys(saved)
                 .filter((key) => key !== "id" && key !== "cookie" && key !== "__lastAccess")
                 .map((key) => {
                     context.set(key, saved[key]);
