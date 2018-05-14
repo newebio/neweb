@@ -74,11 +74,9 @@ class SessionsManager implements ISessionsManager {
                         hasValue: true,
                         stream: new Subject(),
                     };
-                });
-            Object.keys(saved)
-                .filter((key) => key !== "id" && key !== "cookie" && key !== "__lastAccess")
-                .map((key) => {
-                    context.set(key, saved[key]);
+                    if (key !== "id" && key !== "cookie" && key !== "__lastAccess") {
+                        data[key].stream.next(saved[key]);
+                    }
                 });
         }
     }
