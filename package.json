@@ -1,12 +1,13 @@
 {
   "name": "neweb",
-  "version": "0.10.8",
+  "version": "0.10.11",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "tsc && tslint --project tsconfig.json && jest --verbose --coverage",
     "watch:test": "jest --watch",
     "build": "webpack --env=production  --mode=production",
+    "build:dev": "webpack --env=development  --mode=development",
     "build:watch": "webpack -w --env=development --mode=development"
   },
   "bin": {
@@ -48,10 +49,10 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "mkdirp": "^0.5.1",
-    "neweb-browser": "^0.10.0",
-    "neweb-core": "^0.10.1",
+    "neweb-browser": "^0.10.2",
+    "neweb-core": "^0.10.2",
     "neweb-pack": "^0.1.2",
-    "neweb-server": "^0.10.4",
+    "neweb-server": "^0.10.7",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "rxjs": "^6.1.0",

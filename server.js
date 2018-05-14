@@ -63,7 +63,7 @@ function boostrap() {
         const expressApp = express();
         // static
         expressApp.use(express.static(path_1.resolve(path_1.join(appPath, "public"))));
-        expressApp.get("/bundle.js", (_, res) => res.sendFile(path_1.resolve(path_1.join(__dirname, "dist", "bundle.js"))));
+        expressApp.get("/bundle." + env + ".js", (_, res) => res.sendFile(path_1.resolve(path_1.join(__dirname, "dist", "bundle." + env + ".js"))));
         const sessionsManager = new SessionsManager_1.default({
             sessionsPath,
             sessionsStorage,

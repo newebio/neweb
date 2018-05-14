@@ -4435,31 +4435,22 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-neweb-browser@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/neweb-browser/-/neweb-browser-0.10.0.tgz#3e6626df68057baaaa192c856b72fba9ba591441"
+neweb-browser@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/neweb-browser/-/neweb-browser-0.10.2.tgz#563ceded66d94de9b270f3de771a1347d6a7b87a"
   dependencies:
     "@types/react" "^16.3.14"
     "@types/react-dom" "^16.0.5"
     "@types/socket.io-client" "^1.4.32"
-    neweb-core "^0.10.0"
+    neweb-core "^0.10.2"
     onemitter "^0.2.4"
     react "^16.3.2"
     react-dom "^16.3.2"
     socket.io-client "^2.1.0"
 
-neweb-core@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/neweb-core/-/neweb-core-0.10.0.tgz#9e70bfe65d1c6126830bb5d0fd43ffd322e758f2"
-  dependencies:
-    "@types/jss" "^9.5.3"
-    "@types/react" "^16.3.14"
-    jss "^9.8.1"
-    react "^16.3.2"
-
-neweb-core@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/neweb-core/-/neweb-core-0.10.1.tgz#3b79c2c30e2bf1748268ec0f60745bbc409b66c2"
+neweb-core@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/neweb-core/-/neweb-core-0.10.2.tgz#7f29da0b724020050df0ce94cc57ee7428de6ae8"
   dependencies:
     "@types/jss" "^9.5.3"
     "@types/react" "^16.3.14"
@@ -4480,14 +4471,14 @@ neweb-pack@^0.1.2:
     util "^0.10.3"
     webpack "^4.3.0"
 
-neweb-server@^0.10.4:
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.10.4.tgz#3332081ba8789c7efd92f5791840fcfa3abfa823"
+neweb-server@^0.10.7:
+  version "0.10.7"
+  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.10.7.tgz#f2d9432673b36a4290024f1c741863eb9c3bd2eb"
   dependencies:
     "@types/react" "^16.3.14"
     "@types/react-dom" "^16.0.5"
     "@types/uid-safe" "^2.1.1"
-    neweb-core "^0.10.0"
+    neweb-core "^0.10.2"
     react "^16.3.2"
     react-dom "^16.3.2"
     rxjs "^6.1.0"
