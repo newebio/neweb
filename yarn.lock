@@ -114,6 +114,10 @@
   version "10.0.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.8.tgz#37b4d91d4e958e4c2ba0be2b86e7ed4ff19b0858"
 
+"@types/node@^10.1.2":
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.1.2.tgz#1b928a0baa408fc8ae3ac012cc81375addc147c6"
+
 "@types/react-dom@^16.0.5":
   version "16.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.5.tgz#a757457662e3819409229e8f86795ff37b371f96"
@@ -1873,8 +1877,8 @@ csstype@^2.0.0:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.1.tgz#654231d1ddddfc3eb93da281a1144e7c14fc0bdc"
 
 csstype@^2.2.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.0.tgz#53e1c242f422d5d976b81f42707bd9b8934492ee"
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.2.tgz#4534308476ceede8fbe148b9b99f9baf1c80fa06"
 
 cyclist@~0.2.2:
   version "0.2.2"
@@ -4435,27 +4439,16 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-neweb-browser@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/neweb-browser/-/neweb-browser-0.10.2.tgz#563ceded66d94de9b270f3de771a1347d6a7b87a"
+neweb-browser@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/neweb-browser/-/neweb-browser-0.10.3.tgz#91d145e387eb893984d3f9bb047ce905b1aadd5c"
   dependencies:
-    "@types/react" "^16.3.14"
-    "@types/react-dom" "^16.0.5"
-    "@types/socket.io-client" "^1.4.32"
-    neweb-core "^0.10.2"
+    neweb-core "^0.10.3"
     onemitter "^0.2.4"
-    react "^16.3.2"
-    react-dom "^16.3.2"
-    socket.io-client "^2.1.0"
 
-neweb-core@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/neweb-core/-/neweb-core-0.10.2.tgz#7f29da0b724020050df0ce94cc57ee7428de6ae8"
-  dependencies:
-    "@types/jss" "^9.5.3"
-    "@types/react" "^16.3.14"
-    jss "^9.8.1"
-    react "^16.3.2"
+neweb-core@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/neweb-core/-/neweb-core-0.10.3.tgz#c774b7f2aeff6754ea002adebe4ce070d12dec66"
 
 neweb-pack@^0.1.2:
   version "0.1.2"
@@ -4471,16 +4464,22 @@ neweb-pack@^0.1.2:
     util "^0.10.3"
     webpack "^4.3.0"
 
-neweb-server@^0.10.7:
-  version "0.10.7"
-  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.10.7.tgz#f2d9432673b36a4290024f1c741863eb9c3bd2eb"
+neweb-react@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/neweb-react/-/neweb-react-0.0.3.tgz#83b7eff782d25ccfc71b1f3801c3e781e6d8b7a2"
   dependencies:
-    "@types/react" "^16.3.14"
-    "@types/react-dom" "^16.0.5"
+    "@types/jss" "^9.5.3"
+    jss "^9.8.1"
+    neweb-core "^0.10.3"
+    onemitter "^0.2.4"
+
+neweb-server@^0.10.9:
+  version "0.10.9"
+  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.10.9.tgz#7f4699fd69d463e24e0138a6748003d98fb124a4"
+  dependencies:
+    "@types/node" "^10.1.2"
     "@types/uid-safe" "^2.1.1"
-    neweb-core "^0.10.2"
-    react "^16.3.2"
-    react-dom "^16.3.2"
+    neweb-core "^0.10.3"
     rxjs "^6.1.0"
     uid-safe "^2.1.5"
     with-error "^0.1.1"

@@ -1,6 +1,6 @@
 {
   "name": "neweb",
-  "version": "0.10.12",
+  "version": "0.10.13",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -49,10 +49,11 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "mkdirp": "^0.5.1",
-    "neweb-browser": "^0.10.2",
-    "neweb-core": "^0.10.2",
+    "neweb-browser": "^0.10.3",
+    "neweb-core": "^0.10.3",
     "neweb-pack": "^0.1.2",
-    "neweb-server": "^0.10.7",
+    "neweb-react": "^0.0.3",
+    "neweb-server": "^0.10.9",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "rxjs": "^6.1.0",
@@ -60,5 +61,6 @@
     "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0",
     "uid-safe": "^2.1.5"
-  }
+  },
+  "peerDependencies": {}
 }

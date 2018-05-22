@@ -4,6 +4,7 @@ import expressSession = require("express-session");
 import { createServer } from "http";
 import { RemoteMessageType, REQUIRE_FUNC_NAME } from "neweb-core";
 import { ModulePacker } from "neweb-pack";
+import { ServerPageRenderer } from "neweb-react/server";
 import { Application, SeancesManager, Server } from "neweb-server";
 import { join, resolve } from "path";
 import SessionFileStore = require("session-file-store");
@@ -77,9 +78,13 @@ class ServerBootstrap {
             sessionsManager,
         });
         // neweb
+        const pageRenderer = new ServerPageRenderer({
+            app,
+        });
         const server = new Server({
             app,
             seancesManager,
+            pageRenderer,
         });
         const modulesServer = new ModuleServer({
             modulesPath,

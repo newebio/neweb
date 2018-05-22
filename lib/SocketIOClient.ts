@@ -47,7 +47,8 @@ class SocketIOClient implements IRemoteClient {
     public newControllerData(params: INewControllerDataParams) {
         return this.emit(RemoteMessageType.FrameControllerData, {
             frameId: params.controllerId,
-            data: params.data,
+            fieldName: params.fieldName,
+            value: params.value,
         });
     }
     public error(params: IRemoteErrorParams) {
