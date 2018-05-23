@@ -4,6 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("neweb-core"));
+__export(require("neweb-components"));
 __export(require("neweb-server"));
 var SocketIOClient_1 = require("./lib/SocketIOClient");
 exports.SocketIOClient = SocketIOClient_1.default;

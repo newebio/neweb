@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = require("fs");
 const ServerBootstrap_1 = require("./lib/ServerBootstrap");
 function boostrap() {
     return __awaiter(this, void 0, void 0, function* () {
+        require.extensions[".html"] = (module, filename) => {
+            module.exports = fs_1.readFileSync(filename).toString();
+        };
         const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
         const env = process.env.NODE_ENV === "production" ? "production" : "development";
         const server = new ServerBootstrap_1.default({

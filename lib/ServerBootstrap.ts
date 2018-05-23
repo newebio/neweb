@@ -2,6 +2,7 @@ import debug = require("debug");
 import express = require("express");
 import expressSession = require("express-session");
 import { createServer } from "http";
+import { ServerPageRenderer as NewebServerPageRenderer } from "neweb-components/server";
 import { RemoteMessageType, REQUIRE_FUNC_NAME } from "neweb-core";
 import { ModulePacker } from "neweb-pack";
 import { ServerPageRenderer } from "neweb-react/server";
@@ -18,9 +19,13 @@ export interface IServerBootstrapConfig {
     port: number;
     env: "production" | "development";
     expressApp?: express.Express;
+    engine?: "react" | "neweb";
 }
 class ServerBootstrap {
-    constructor(protected config: IServerBootstrapConfig) { }
+    protected engine: "react" | "neweb" = "neweb";
+    constructor(protected config: IServerBootstrapConfig) {
+        this.engine = this.config.engine || "neweb";
+    }
     public async start() {
         const rootPath = this.config.rootPath;
         const port = this.config.port;
@@ -31,15 +36,28 @@ class ServerBootstrap {
         const sessionsPath = join(appPath, "..", "sessions");
         // logs
         if (env === "development") {
-            debug.enable("*");
+            debug.enable("*,-engine:*,-engine,-socket.io-parser,-socket.io:*");
         }
         const expressApp = this.config.expressApp ? this.config.expressApp : express();
         // neweb-pack
         const modulePacker = new ModulePacker({
             appRoot: appPath,
-            excludedModules: ["react", "react-dom", "neweb"],
+            excludedModules: ["react", "react-dom", "neweb", "neweb-components"],
             modulesPath,
             REQUIRE_FUNC_NAME,
+            webpackConfig: {
+                module: {
+                    rules: [{
+                        test: /\.html$/,
+                        use: [{
+                            loader: require.resolve("html-loader"),
+                            options: {
+                                minimize: true,
+                            },
+                        }],
+                    }],
+                },
+            },
         });
         // create app
         const app = new Application({
@@ -67,7 +85,7 @@ class ServerBootstrap {
         // static
         expressApp.use(express.static(resolve(join(appPath, "public"))));
         expressApp.get("/bundle." + env + ".js", (_, res) =>
-            res.sendFile(resolve(join(__dirname, "..", "dist", "bundle." + env + ".js"))));
+            res.sendFile(resolve(join(__dirname, "..", "dist", "bundle." + env + "." + this.engine + ".js"))));
 
         const sessionsManager = new SessionsManager({
             sessionsPath,
@@ -78,7 +96,9 @@ class ServerBootstrap {
             sessionsManager,
         });
         // neweb
-        const pageRenderer = new ServerPageRenderer({
+        const pageRenderer = this.engine === "react" ? new ServerPageRenderer({
+            app,
+        }) : new NewebServerPageRenderer({
             app,
         });
         const server = new Server({

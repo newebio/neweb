@@ -1,7 +1,7 @@
 export = (env: string) => ({
-    entry: __dirname + "/client.js",
+    entry: __dirname + "/client.neweb.js",
     output: {
         path: __dirname + "/dist",
-        filename: "bundle." + (env === "production" ? "production" : "development") + ".js",
+        filename: "bundle." + (env === "production" ? "production" : "development") + ".neweb.js",
     },
 });
