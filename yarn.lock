@@ -3909,7 +3909,7 @@ jscodeshift@^0.5.0:
     temp "^0.8.1"
     write-file-atomic "^1.2.0"
 
-jsdom@^11.10.0:
+jsdom@^11.11.0:
   version "11.11.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-11.11.0.tgz#df486efad41aee96c59ad7a190e2449c7eb1110e"
   dependencies:
@@ -4558,18 +4558,11 @@ neweb-browser@^0.11.0:
     neweb-core "^0.10.3"
     onemitter "^0.2.4"
 
-neweb-components@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/neweb-components/-/neweb-components-0.11.1.tgz#0c19993aff4ac7963c3b919fc12ff68c66e5fd8f"
+neweb-components@^0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/neweb-components/-/neweb-components-0.13.1.tgz#001f8f0ca1ccbce89f0914fea2d190c0619c6736"
   dependencies:
-    "@types/debug" "^0.0.30"
-    "@types/jsdom" "^11.0.4"
-    debug "^3.1.0"
-    jsdom "^11.10.0"
     morphdom "^2.3.3"
-    neweb-core "^0.11.0"
-    onemitter "^0.2.4"
-    rxjs "^6.2.0"
 
 neweb-core@^0.10.3:
   version "0.10.3"

@@ -5,10 +5,15 @@ const neweb_browser_1 = require("neweb-browser");
 const neweb_components_1 = require("neweb-components");
 const neweb_core_1 = require("neweb-core");
 const Neweb = require("./common");
+const ClientPageRenderer_1 = require("./lib/neweb-components/client/ClientPageRenderer");
 if (process.env.NODE_ENV === "development") {
     debug.enable("*,-socket.io:*,-engine:*,-socket.io-client:*,-engine.io-client:*,-socket.io-client,-socket.io-parser");
 }
 const SocketIOClient = require("socket.io-client");
+const doc = new neweb_components_1.Document({
+    window,
+});
+neweb_components_1.Component.setDocument(doc);
 const initial = window[neweb_core_1.INITIAL_VAR];
 const socket = SocketIOClient(window.location.protocol + "//" + window.location.host);
 const modulesManager = new neweb_browser_1.ModulesManager({
@@ -25,7 +30,7 @@ const modulesManager = new neweb_browser_1.ModulesManager({
 const app = new neweb_browser_1.Application({
     modulesManager,
 });
-const pageRenderer = new neweb_components_1.ClientPageRenderer({
+const pageRenderer = new ClientPageRenderer_1.default({
     app,
     rootHtmlElement: document.getElementById("root"),
 });

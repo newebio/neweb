@@ -2,7 +2,6 @@ import debug = require("debug");
 import express = require("express");
 import expressSession = require("express-session");
 import { createServer } from "http";
-import { ServerPageRenderer as NewebServerPageRenderer } from "neweb-components/server";
 import { RemoteMessageType, REQUIRE_FUNC_NAME } from "neweb-core";
 import { ModulePacker } from "neweb-pack";
 import { ServerPageRenderer } from "neweb-react/server";
@@ -12,6 +11,7 @@ import SessionFileStore = require("session-file-store");
 import SocketIO = require("socket.io");
 import ExpressHttpHandler from "./ExpressHttpHandler";
 import ModuleServer from "./ModulesServer";
+import NewebServerPageRenderer from "./neweb-components/server/PageRenderer";
 import SessionsManager from "./SessionsManager";
 import SocketIOClient from "./SocketIOClient";
 export interface IServerBootstrapConfig {

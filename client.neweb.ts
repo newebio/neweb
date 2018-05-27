@@ -1,13 +1,18 @@
 import debug = require("debug");
 import { Application, ModulesManager, PageMetaManager, Seance } from "neweb-browser";
-import { ClientPageRenderer } from "neweb-components";
+import { Component, Document } from "neweb-components";
 import { INITIAL_VAR, ISeanceInitialInfo } from "neweb-core";
 import Neweb = require("./common");
+import ClientPageRenderer from "./lib/neweb-components/client/ClientPageRenderer";
 if (process.env.NODE_ENV === "development") {
-    debug.enable("*,-socket.io:*,-engine:*,-socket.io-client:*,-engine.io-client:*,-socket.io-client,-socket.io-parser");
+    debug.enable(
+        "*,-socket.io:*,-engine:*,-socket.io-client:*,-engine.io-client:*,-socket.io-client,-socket.io-parser");
 }
 import SocketIOClient = require("socket.io-client");
-
+const doc = new Document({
+    window,
+});
+Component.setDocument(doc);
 const initial: ISeanceInitialInfo = (window as any)[INITIAL_VAR];
 const socket = SocketIOClient(window.location.protocol + "//" + window.location.host);
 const modulesManager = new ModulesManager({
