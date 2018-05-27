@@ -4558,9 +4558,9 @@ neweb-browser@^0.11.0:
     neweb-core "^0.10.3"
     onemitter "^0.2.4"
 
-neweb-components@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/neweb-components/-/neweb-components-0.13.1.tgz#001f8f0ca1ccbce89f0914fea2d190c0619c6736"
+neweb-components@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/neweb-components/-/neweb-components-0.13.2.tgz#cdbd7eff8a930200645f32d630082c8a7be67131"
   dependencies:
     morphdom "^2.3.3"
 
