@@ -4601,9 +4601,9 @@ neweb-react@^0.0.3:
     neweb-core "^0.10.3"
     onemitter "^0.2.4"
 
-neweb-server@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.11.0.tgz#a14cbabebc9c58ac3b625a798f7488cfe28d88ee"
+neweb-server@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/neweb-server/-/neweb-server-0.11.1.tgz#8912b51c2f11fb43752310351e30cfa659045e8d"
   dependencies:
     "@types/debug" "^0.0.30"
     "@types/node" "^10.1.2"
