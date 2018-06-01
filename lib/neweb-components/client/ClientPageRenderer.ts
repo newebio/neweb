@@ -5,7 +5,8 @@ import {
     IRemoteFrameControllerDataParams, IRemoteFrameControllerDispatchParams,
 } from "neweb-core";
 import { Onemitter } from "onemitter";
-import { BehaviorSubject, Subject } from "rxjs";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Subject } from "rxjs/Subject";
 import { IViewParams } from "./IViewParams";
 export interface IClientPageRendererConfig {
     rootHtmlElement: HTMLElement;
