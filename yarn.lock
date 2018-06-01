@@ -4578,9 +4578,9 @@ neweb-core@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/neweb-core/-/neweb-core-0.11.0.tgz#7fc8b8384603fed8c5937c0b826e4f5f320304b4"
 
-neweb-pack@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/neweb-pack/-/neweb-pack-0.11.1.tgz#0a3f0130c37c17ed25b19dd942605e8a8cbb9f93"
+neweb-pack@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/neweb-pack/-/neweb-pack-0.11.2.tgz#2897cb05b3c9b751840dd6d03010e2e2948c9b45"
   dependencies:
     "@types/globby" "^6.1.0"
     "@types/mkdirp" "^0.5.2"

@@ -87,6 +87,7 @@ class ClientPageRenderer {
         }
     }
     protected async loadViews(page: IPage) {
+        console.log("load views", page);
         await Promise.all(page.frames.map(async (pageFrame) => {
             this.views[pageFrame.frameName] = await this.config.app.getFrameViewClass(pageFrame);
         }));
