@@ -45,6 +45,7 @@ class ServerBootstrap {
             excludedModules: ["react", "react-dom", "neweb", "neweb-components"],
             modulesPath,
             REQUIRE_FUNC_NAME,
+            disableCacheForLocalModules: env === "development",
             webpackConfig: {
                 module: {
                     rules: [{
