@@ -7,7 +7,8 @@ import {
 import { Onemitter } from "onemitter";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Subject } from "rxjs/Subject";
-import { IViewParams } from "./IViewParams";
+import { ISeanceContext, NavigateStatus, NetworkStatus } from "./../../ISeanceContext";
+import { IViewProps } from "./IViewProps";
 export interface IClientPageRendererConfig {
     rootHtmlElement: HTMLElement;
     app: {
@@ -20,7 +21,8 @@ class ClientPageRenderer {
     protected seansStatusEmitter: Onemitter<string>;
     protected networkStatusEmitter: Onemitter<string>;
     protected historyContext: any;
-    protected views: { [index: string]: new (config: IViewParams<any, any, any>) => Component<any> } = {};
+    protected seanceContext: ISeanceContext;
+    protected views: { [index: string]: new (config: IViewProps<any, any, any>) => Component<any> } = {};
     protected frames: {
         [index: string]: {
             component: Component<any>;
@@ -44,6 +46,19 @@ class ClientPageRenderer {
         this.seansStatusEmitter = params.seansStatusEmitter;
         this.networkStatusEmitter = params.networkStatusEmitter;
         this.historyContext = params.historyContext;
+        const networkStatus = new BehaviorSubject<NetworkStatus>("" as any);
+        const navigateStatus = new BehaviorSubject<NavigateStatus>("" as any);
+        this.networkStatusEmitter.onAndGet((value) => {
+            networkStatus.next(value as any);
+        });
+        this.seansStatusEmitter.onAndGet((value) => {
+            navigateStatus.next(value as any);
+        });
+        this.seanceContext = {
+            navigate: this.navigate,
+            networkStatus,
+            navigateStatus,
+        };
     }
     public async loadPage(page: IPage) {
         await this.loadViews(page);
@@ -116,7 +131,7 @@ class ClientPageRenderer {
             data,
             children,
             params,
-            navigate: this.navigate,
+            seance: this.seanceContext,
             dispatch: (actionName: string, ...args: any[]) => this.dispatch({
                 frameId: pageFrame.frameId,
                 actionName,

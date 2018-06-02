@@ -47,6 +47,9 @@ history.pushState = (url) => {
     seance.navigate(url);
     realPushState(url, "", url);
 };
+window.addEventListener("popstate", (e) => {
+    seance.navigate(e.state);
+});
 const logger = console;
 seance.initialize(initial).then(() => {
     window.dispatchEvent(new Event("neweb-seans-initialized"));

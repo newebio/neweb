@@ -1,7 +1,7 @@
 import { JSDOM } from "jsdom";
 import { Component, Document } from "neweb-components";
 import { IPage } from "neweb-core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 export interface IPageRendererConfig {
     app: {
         getFrameViewClass: (frameName: string) => any;
@@ -50,6 +50,10 @@ class PageRenderer {
             data,
             children: new BehaviorSubject(children),
             params: new BehaviorSubject(pageFrame.params),
+            seance: {
+                networkStatus: of("disconnected"),
+                navigateStatus: of("ready"),
+            },
         });
         return component;
     }
