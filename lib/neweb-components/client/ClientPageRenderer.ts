@@ -25,7 +25,7 @@ class ClientPageRenderer {
         [index: string]: {
             component: Component<any>;
             data: { [index: string]: Subject<any> };
-            children: { [index: string]: BehaviorSubject<Component<any>> };
+            children: BehaviorSubject<{ [index: string]: Component<any> }>;
             params: BehaviorSubject<any>;
             pageFrame: IPageFrame;
         };
@@ -81,6 +81,7 @@ class ClientPageRenderer {
         hydrate(this.frames[this.currentPage.rootFrame].component, this.config.rootHtmlElement);
     }
     public emitFrameControllerData(params: IRemoteFrameControllerDataParams) {
+
         const frame = this.frames[params.frameId];
         if (frame) {
             frame.data[params.fieldName].next(params.value);
@@ -94,15 +95,14 @@ class ClientPageRenderer {
     protected renderFrame(frameId: string, page: IPage) {
         const frame = this.frames[frameId];
         const pageFrame = page.frames.filter((f) => f.frameId === frameId)[0];
+        const children: { [index: string]: Component<any> } = {};
         Object.keys(pageFrame.frames).map((placeName) => {
             const childFrameId = pageFrame.frames[placeName];
             this.renderFrame(childFrameId, page);
             const childFrame = this.frames[childFrameId];
-            if (frame.pageFrame.frames[placeName] !== pageFrame.frames[placeName]
-                || !frame.children[placeName].getValue()) {
-                frame.children[placeName].next(childFrame.component);
-            }
+            children[placeName] = childFrame.component;
         });
+        frame.children.next(children);
     }
     protected createFrame(pageFrame: IPageFrame) {
         const ViewClass = this.views[pageFrame.frameName];
@@ -110,10 +110,7 @@ class ClientPageRenderer {
         Object.keys(pageFrame.data).map((dataName) => {
             data[dataName] = new BehaviorSubject(pageFrame.data[dataName]);
         });
-        const children: { [index: string]: BehaviorSubject<Component<any>> } = {};
-        Object.keys(pageFrame.frames).map((childName) => {
-            children[childName] = new BehaviorSubject(undefined as any);
-        });
+        const children: BehaviorSubject<{ [index: string]: Component<any> }> = new BehaviorSubject({});
         const params = new BehaviorSubject(pageFrame.params);
         const component = new ViewClass({
             data,

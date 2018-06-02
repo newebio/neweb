@@ -146,7 +146,7 @@ class ServerBootstrap {
                 process.exit(1);
                 return;
             }
-            debug("http")("Http server at port ", port);
+            debug("http")("Http server at http://127.0.0.1:" + port + "/");
         });
     }
 }

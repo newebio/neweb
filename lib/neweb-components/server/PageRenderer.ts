@@ -48,7 +48,7 @@ class PageRenderer {
         });
         const component = new FrameView({
             data,
-            children,
+            children: new BehaviorSubject(children),
             params: new BehaviorSubject(pageFrame.params),
         });
         return component;

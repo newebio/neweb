@@ -1,6 +1,9 @@
 import { Component } from "neweb-components";
+import { Observable } from "rxjs";
 
-export interface IViewParams<PARAMS, DATA, CHILDREN extends { [index: string]: Component<any> }> {
+export interface IViewParams<PARAMS,
+    DATA extends Observable<{ [index: string]: any }>,
+    CHILDREN extends Observable<{ [index: string]: Component<any> }>> {
     params: PARAMS;
     data: DATA;
     children: CHILDREN;
